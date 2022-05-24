@@ -20,6 +20,7 @@
 <body>
     <%- include('partials/header') %>
 <main>
+    <form action="/bproduct/registraCompra/<%= suma %>" method="POST">
     <div class="tituloPaginaFin">
         <!--<p class="tituloPagina"><img width="40" height="40" class="logoCarrito" src="/images/logoCarritoDeCompras.png" alt= "Cartera"> -->
             <!--<p id="logoCarrito"><i class="fa fa-shopping-cart" aria-hidden="true"></i></p> -->
@@ -29,7 +30,7 @@
             <input placeholder="" type="number" name="subTotal" id="noSeVe" value="<%= suma %>" ></p>
             <input placeholder="" type="number" name="nroFact" id="noSeVe" value="<%= facturacion.numero %>" ></p>
     </div>
-    <form action="/bproduct/registraCompra/<%= suma %>" method="POST">
+   <!--- <form action="/bproduct/registraCompra/<%= suma %>" method="POST"> -->
         <div class="datosFacturacion">
             <p><label id="" for ="nombreProducto">DIRECCION ENTREGA</label>
             <input placeholder="" type="text" minlength="10" maxlength="45" name="direccion" id="direccion" required "[[A-Za-z ]{1,6}"></p>

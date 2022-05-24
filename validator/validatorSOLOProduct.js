@@ -161,12 +161,10 @@ const validatorSOLOP = {
         check("condicion")
                 .notEmpty()
                 .withMessage("Debe Seleccionar este campo"),
-            check("mail")
-               .notEmpty() 
-               .withMessage("Email no puede estar vacío"),
-               check("terminos")
-               .notEmpty() 
-               .withMessage("Debe aceptar términos y condiciones")      
+        check("terminos")
+                .notEmpty()
+                .withMessage("Debe aceptar TERMINOS Y CONDICIONES")        
+                 
          ] 
 }
 

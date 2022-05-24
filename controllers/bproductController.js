@@ -778,8 +778,8 @@ const controller = {
   },
   finComprar: (req, res) => {
     let row = productModel.find(0);
-
-    res.render("finCarritoDB", { facturacion: row, suma: req.params.suma });
+    let suma = parseInt(req.params.suma)
+    res.render("finCarritoDB", { facturacion: row, suma:suma });
   },
   creaFactura: async (req, res) => {
     // falta validationResults

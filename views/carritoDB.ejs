@@ -37,7 +37,7 @@
     <%- include('partials/header') %>
 <main>
     <div class="tituloPagina">
-   >
+   
         <h2><i class="fa fa-shopping-cart" aria-hidden="true"></i> </h2>       
 
     </div>
@@ -48,8 +48,8 @@
             <div><img width="320" height="320" src="/images/<%= compras[i].itemProduct.image_ppal %>" alt= "Cartera"></div>
             <div><b><label for="producto1" class="titulosDeProductos"><%= compras[i].itemProduct.name %></label></b>
             <p>Cantidad= <%= compras[i].quantity %></p>
-            <p>Precio Item = <%= compras[i].item_u_price %></p></div>
-            <div class="botonAgregarEliminar"><input type= "button" name="producto1" id="producto1" value="+ 1 -" class="botonesAgregado"></div>
+            <p>Precio Item $ = <%= compras[i].item_u_price %></p></div>
+           <!--- <div class="botonAgregarEliminar"><input type= "button" name="producto1" id="producto1" value="+ 1 -" class="botonesAgregado"></div>-->
         </article>
         <% } %>
        <!--- <article class="segundoProducto">

@@ -46,11 +46,7 @@
                 <input class="todosLosBotones" placeholder="" type="text"  name="ganancias"></p>
                                  
                 
-                <p><label id="" for ="mail" class="todosLosTitulos">Correo Electrónico</label>
-                <input class="todosLosBotones" placeholder="" type="text"  name="mail" ></p>
-                <% if(locals.errorsProd && locals.errorsProd.mail){ %>
-                    <span id="errorMsge" > <%= errorsProd.mail.msg  %> </span>
-                  <% } %> 
+                
                 <br/> 
                 
             </div>
@@ -58,7 +54,7 @@
                     <span>
                         <label for="terminos">He leido y acepto los Términos y Condiciones</label>                       
                         <input type="checkbox" name="terminos" value="ok">
-                        <% if(locals.errorsProd && locals.errorsProd.mail){ %>
+                        <% if(locals.errorsProd && locals.errorsProd.terminos){ %>
                             <span id="errorMsge" > <%= errorsProd.terminos.msg  %> </span>
                           <% } %> 
                         <br/>

@@ -56,7 +56,7 @@
                     <div class="divSecundarias">              
                         <img id="secundarias" src="/images/<%= producto.image_det1 %>">
                         <img id="secundarias" src="/images/<%= producto.image_det2 %>">
-                        <img id="secundariasManga" src="/images/<%= producto.image_det3 %>">
+                        <img id="secundarias" src="/images/<%= producto.image_det3 %>">
                     </div> 
                 </div>                      
                 </div>
@@ -97,13 +97,13 @@
                  <br/>                       
                         <div class="seleccionColor">
                             <h2>Elija UN COLOR para su pedido</h2>
-                            <h2>Luego podrá volver a comprar el/los colores disponibles</h2>
+                            <h2>Para comprar más colores vuelva a comprar</h2>
                      <% if(locals.errorsProd && locals.errorsProd.color){ %>
                                 <br/>
                                 <p id="errorMsge"> <%= errorsProd.colores.msg  %> </p>
                     <% } %> 
                             <br/>
-                            <div class="colores">
+                           <!--- <div class="colores"> -->
                             <% for (i=0 ; i< producto.coloresDB.length; i++){ %> 
                             <!--<p><img id="colorList" src="public/images/<=% colors[i].color_image %>"></p> -->
                           <!---  <label for="colores"><%= producto.coloresDB[i].color_name %> -->
@@ -112,7 +112,7 @@
                          
                             <br/>     
                             <% } %>
-                            </div>
+                           <!--- </div> -->
                         </div>
                     </div>
                 </div>    
