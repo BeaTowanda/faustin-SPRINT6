@@ -704,6 +704,8 @@ const controller = {
             res.render("formularioTaxesDB");
           } else {
             // de impuesto
+            // calcula todos los descuentos y el total item 
+            // revisa si hay también precio de OFERTA SEMANAL 
             let aux3 = 0;
             let precioBody = parseInt(req.body.precio);
             let dtoBody = parseInt(req.body.descuento);
@@ -721,6 +723,7 @@ const controller = {
               // de ofertaSem
               aux2 = aux1;
             }
+            // termina los cálculos precio unitario
             let compra = await db.InvoiceItem.create({
               id_product: req.params.id,
               quantity: req.body.cantidadProducto,
@@ -739,18 +742,21 @@ const controller = {
             let suma = 0;
             let montoItem = 0;
             //return res.json(otrasCompras)
+            console.log("lenght de otras"+ otrasCompras.length)
             for (i = 0; i < otrasCompras.length; i++) {
               if (
-                otrasCompras.item_u_price !== 0 ||
-                otrasCompras.item_u_price !== undefined
+                otrasCompras[i].item_u_price !== 0 ||
+                otrasCompras[i].item_u_price !== undefined
               ) {
-                montoItem = parseInt(otrasCompras.price_u_item);
+                // res.json(otrasCompras)
+
+                montoItem = parseInt(otrasCompras[i].item_u_price);
                 suma = suma + montoItem;
-                console.log("montoItem = " + montoItem + "suma es = " + suma);
+                console.log("montoItem = " + montoItem + "suma es = " + suma );
               } // fin del if
-            }
-            //res.send("suma es igual a = " + suma)
-            //res.send("el montoItem es = " + montoItem)
+         
+            }  // final del for
+
             res.render("carritoDB", { compras: otrasCompras, suma: suma });
           } // el else de impuestos
         } catch (error) {
@@ -778,18 +784,20 @@ const controller = {
   },
   finComprar: (req, res) => {
     let row = productModel.find(0);
-    let suma = parseInt(req.params.suma)
-    res.render("finCarritoDB", { facturacion: row, suma:suma });
+    let suma = parseInt(req.params.suma);
+    res.render("finCarritoDB", { facturacion: row, suma: suma });
   },
   creaFactura: async (req, res) => {
     // falta validationResults
     //const errors = validationResult(req);
 
     //if (errors.errors.length > 0) {
-     // res.render("finCarritoDB", { errorsProd: errors });
-   //} else {
-     let total1 = parseInt(req.params.suma)
-   try {
+    // res.render("finCarritoDB", { errorsProd: errors });
+    //} else {
+    console.log(req.params.suma + "es la suma que recibe por params")
+    let total1 = parseInt(req.params.suma);
+    console.log("y el total1 = " + total1)
+    try {
       // actualiza el nro de factura en JSON
       // busco el nro de factura
       let facturacion = productModel.find(0);
@@ -801,40 +809,33 @@ const controller = {
         premiun: facturacion.premiun,
       };
       productModel.update(facturaData);
-      //let actualiza = [];
-      // actualiza InvoiceItem
-      let items = await db.InvoiceItem.findAll({
-        where :{
-          id_user : req.session.usuarioLogueado.id,
-          made:0
-        }
-      })
-      let actualiza =[];
-      for (i = 0; i < items.length; i++) {
-       actualiza = await db.InvoiceItem.update(
-          {
-            made: numeroFact,
+   // actualiza el numero en invoiceItem
+      let item = await db.InvoiceItem.update(
+        {
+          made: numeroFact,
+        },
+        {
+          where: {
+            id_user: req.session.usuarioLogueado.id,
+            made: 0,
           },
-          {
-            where: {
-              id_user: req.session.usuarioLogueado.id,
-            },
-          }
-        );
-      } // final del for
+        }
+      );
+      console.log("el body distribucion" + req.body.costoDistribucion)
       total1 = total1 + parseInt(req.body.costoDistribucion);
+      // crea la factura 
       let factura = await db.Invoice.create({
         number: numeroFact,
         id_user: req.session.usuarioLogueado.id,
         delivery_dir: req.body.direccion,
         delivery_cost: req.body.costoDistribucion,
-        total :total1
+        total: total1,
       });
     } // final del try
-    catch(error){
-      console.log(error)
+    catch (error) {
+      console.log(error);
     }
-  //} // finsl del else
+    //} // final del else
   },
   altaTaxes: (req, res) => {
     res.render("formularioTaxesDB");
@@ -980,11 +981,11 @@ const controller = {
   },
   search: (req, res) => {
     //console.log(req.query.busca[o])
-    console.log("en el query viene... " + req.query.busca);
+    //console.log("en el query viene... " + req.query.busca);
     let verprimera = req.query.busca.split(" ");
     let busca1 = verprimera[0];
     let idBusca = verprimera[1];
-    console.log("la primer letra es " + verprimera[0]);
+    //console.log("la primer letra es " + verprimera[0]);
     switch (busca1) {
       case "C":
         db.Product.findAll({
@@ -1078,34 +1079,7 @@ const controller = {
     console.log("el producto" + req.session.usuarioLogueado);
 
     /* let producto = db.Product.findAll({
-    where: {
-      id_type: "1",
-    },
-    //  include :["coloresDB"],
-    include: ["pYear", "pColection", "pType", "coloresDB"],
-  });
-  let colors = db.ProductColor.findAll();
-  let years = db.ProductYear.findAll();
-  let types = db.ProductType.findAll();
-  let colections = db.ProductColection.findAll();
-
-  Promise.all([producto, colors, years, types, colections]).then(function ([
-    product,
-    productColors,
-    productYears,
-    productTypes,
-    productColections,
-  ]) {
-    return res.json(product)
-    //return res.render("updateProductoDB", {
-    //  colors: productColors,
-    //  years: productYears,
-    //  types: productTypes,
-    //  colections: productColections,
-    //  producto: product,
-   //   errorsProd: errors.mapped(),
-   // }
-   // );
+   
   }*/
     //)}
   },
