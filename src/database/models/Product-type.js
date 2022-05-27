@@ -21,12 +21,12 @@ module.exports = (sequelize, dataTypes) => {
     }
     const ProductType = sequelize.define(alias, cols, config); 
 
-    //ProductType.associate = function(models) {
-    //    ProductType.hasMany(models.Product, {
-     //       as:"typesP",
-     //       foreignKey:"id_type"
-     //   })
-    //}
+    ProductType.associate = function(models) {
+        ProductType.hasMany(models.Product, {
+           as:"typesP",
+            foreignKey:"id_type"
+       })
+    }
     
 
     return ProductType

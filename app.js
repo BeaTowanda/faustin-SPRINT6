@@ -8,6 +8,7 @@ var session = require('express-session')
 const recordar = require("./middlewares/recordarMiddle");
 const locals = require("./middlewares/locals");
 var methodOverride = require('method-override')
+const cors = require ("cors");
 //<form class="ui form" action="/posts/<%= post['_id'] %>?_method=PUT" method="POST">
 
 
@@ -21,6 +22,8 @@ const usersRouter = require('./routes/users');
 // abajo vienen los routers de BASE DE DATOS 
 const bproductRouter = require("./routes/bproduct");
 const busersRouter = require('./routes/busers');
+const apiRouter = require('./routes/api');
+
 var app = express();
 
 // view engine setup
@@ -37,6 +40,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }))
+app.use(cors());
 
 app.use(recordar);
 app.use(locals);
@@ -49,6 +53,7 @@ app.use("/bproduct", bproductRouter)
 
 app.use('/users', usersRouter);
 app.use("/busers", busersRouter)
+app.use('/api', apiRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

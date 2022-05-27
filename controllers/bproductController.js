@@ -136,11 +136,10 @@ const controller = {
           array: productYear,
         });
       } else {
-        console.log("está en else de alta " + req.body.name);
+        
         let newYear = {
           year_name: req.body.name,
         };
-        console.log(newYear.year_name + "es el req.body");
         db.ProductYear.create(newYear);
         res.render("enlacesDB");
       } // termina el IF
@@ -412,7 +411,6 @@ const controller = {
         description: req.body.description,
         description2: req.body.description2,
         price: req.body.price,
-        //falta tema imagenes
         dto: req.body.descuento,
         //created : new DATE(),
         id_colection: req.body.colection,
@@ -448,6 +446,14 @@ const controller = {
         res.render("listProductsDB", { array });
       }
     });
+  },
+  armarApi: async(req,res) =>{
+    
+    let productos = await db.ProductType.findAll({
+      include:["typesP" ]  
+    })
+    return res.json(productos)
+ 
   },
   detailOneDB: (req, res) => {
     let producto = db.Product.findOne({

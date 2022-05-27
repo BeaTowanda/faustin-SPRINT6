@@ -10,6 +10,7 @@ const validatorSOLOProduct = require("../validator/validatorSOLOProduct");
 
 router.get('/buscarPorBarra',bproductController.search);
 router.get('/opciones',authMiddle,bproductController.enlaces);
+router.get('/verApi',authMiddle,bproductController.armarApi);
 // TIPO DE PRODUCTO
 
 router.get("/altaType",bproductController.altaType);

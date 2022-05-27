@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="/stylesheets/formularioRegistro.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
     <link rel="https://fontawesome.com/">
+   <!--- <script src="/js/registro.js"></script> -->
+
     <title>Formulario Registro</title>
 </head>
 <body>
@@ -19,7 +22,7 @@
 
     <section class="formularioParaRegistro">
         
-        <form action="/busers/register?_method=PUT" enctype="multipart/form-data" method="POST" >
+        <form  action="/busers/register?_method=PUT" enctype="multipart/form-data" method="POST" >
             <p><label id="" for ="usuario" class="todosLosTitulos">Usuario</label>
                 <input class="todosLosBotones" placeholder="" type="text"  name="usuario" ></p>
                 <% if(locals.errorsReg && locals.errorsReg.usuario){ %>
