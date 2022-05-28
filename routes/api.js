@@ -3,7 +3,9 @@ var router = express.Router();
 const apisController= require("../controllers/api/apisController");
 
 router.get('/users', apisController.usersList);
+router.get('/lastUsers', apisController.usersLast);
 router.get("/users/:id" , apisController.userDetail);
+router.get('/usersCategorias', apisController.usersCategorList);
 //
 router.get("/orders", apisController.amountOrder);
 router.get("/categories", apisController.categoriesList);

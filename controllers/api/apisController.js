@@ -45,6 +45,52 @@ userDetail: function (req, res) {
         res.json(jsonProducto);
     })
 },
+usersLast :async function(req,res){
+    let lastUser = await db.User.findAll({
+        limit:4
+    })
+    lastUser.forEach(user => {
+        user.setDataValue("endpoint", "/api/lastUsers/" + user.id);
+    })
+
+    let jsonUsers = {
+        meta:{
+            status: 200,       
+            lastUser: lastUser,
+            url: "/api/lastUsers"
+        },
+        data: {
+            id: lastUser.id,
+            name :lastUser.userName,
+            avatar:lastUser.avatar
+        }
+    }
+    res.json(jsonUsers)
+
+},
+usersCategorList: async function(req, res){
+ 
+    let userCategories = await db.UserCategory.findAll({
+        include : ["categoU"]
+    })
+    //return res.json(subcategories)
+    let quantityUsers = userCategories.map(userCategories =>{
+        return {
+            name : userCategories.category_name,
+            count : userCategories.categoU.length
+        }
+    })
+
+    let userCategoriesJson = {
+        meta:{
+            status:200,
+            url:"/api/userCategories",
+            quantityUsers
+        },
+        data: userCategories
+    }
+    res.json(userCategoriesJson)
+},
 productsList: async function (req, res){
 
     let products = await db.Product.findAll({
