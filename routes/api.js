@@ -4,6 +4,7 @@ const apisController= require("../controllers/api/apisController");
 
 router.get('/users', apisController.usersList);
 router.get("/users/:id" , apisController.userDetail);
+//
 router.get("/orders", apisController.amountOrder);
 router.get("/categories", apisController.categoriesList);
 // categorias type/colection/year

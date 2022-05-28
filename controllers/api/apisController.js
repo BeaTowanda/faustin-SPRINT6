@@ -7,7 +7,7 @@ usersList: function (req, res){
         let newData = users.map(user => {
             return {
                 id: user.id,
-                userName: user.name,
+                userName: user.userName,
                 first_name : user.first_name,
                 last_name: user.last_name,
                 email: user.email, 
