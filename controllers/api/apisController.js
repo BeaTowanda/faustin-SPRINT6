@@ -96,9 +96,10 @@ productDetail: function(req, res){
                 name: product.name,
                 price: product.price,
                 description: product.description,
+                dto: product.dto,
                 //data_color:product.coloresDB,
                 //data_color: product.colors,
-                data_subcategory : product.id_type
+                data_subcategory : product.pType.type_name
                 //data_subcategory: product.subcategory
             }
         }
@@ -142,15 +143,6 @@ categoriesList: async function(req, res){
     res.json(categoriesJson);
 },
 subcategoryList: async function(req, res){
-/*    let subcategories = await db.Subcategory.findAll({
-        include: ["products"]
-    })
-    let quantityProducts = subcategories.map(subcategory =>{
-        return {
-            name: subcategory.name,
-            count: subcategory.products.length
-        }
-    })*/
     let subcategories = await db.ProductType.findAll({
         include : ["typesP"]
     })
