@@ -173,15 +173,7 @@ subcategoryList: async function(req, res){
     res.json(subcategoriesJson)
 }, 
 colectionList: async function(req, res){
-    /*    let subcategories = await db.Subcategory.findAll({
-            include: ["products"]
-        })
-        let quantityProducts = subcategories.map(subcategory =>{
-            return {
-                name: subcategory.name,
-                count: subcategory.products.length
-            }
-        })*/
+ 
         let colectionCategories = await db.ProductColection.findAll({
             include : ["colectionP"]
         })
@@ -202,6 +194,29 @@ colectionList: async function(req, res){
             data: colectionCategories
         }
         res.json(colectionCategoriesJson)
+    },
+yearList: async function(req, res){
+ 
+    let yearCategories = await db.ProductYear.findAll({
+            include : ["yearsP"]
+        })
+        //return res.json(subcategories)
+        let quantityProducts = yearCategories.map(yearCategories =>{
+            return {
+                name : yearCategories.year_name,
+                count : yearCategories.yearsP.length
+            }
+        })
+    
+        let yearCategoriesJson = {
+            meta:{
+                status:200,
+                url:"/api/yearCategories",
+                quantityProducts
+            },
+            data: yearCategories
+        }
+        res.json(yearCategoriesJson)
     },
 updateCart: async function(req, res){
     await db.Item.update({

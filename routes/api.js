@@ -9,6 +9,7 @@ router.get("/categories", apisController.categoriesList);
 // categorias type/colection/year
 router.get("/subcategories", apisController.subcategoryList);
 router.get("/colectionCategories", apisController.colectionList)
+router.get("/yearCategories", apisController.yearList)
 router.get('/products', apisController.productsList);
 //
 router.get("/products/:id", apisController.productDetail);
