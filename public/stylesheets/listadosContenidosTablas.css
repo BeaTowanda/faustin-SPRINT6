@@ -2,6 +2,7 @@
     color:black;
     text-decoration: none;
     margin-left: 2.5rem;
+    list-style: none;
 }
 
 .listadoEnBaseGral, .listadoEnBaseGral li, .listadoEnBaseGral a{
@@ -10,4 +11,21 @@
     margin-left: 2.5rem;
     font-size: 15pt;
     list-style: none;
+}
+div.listadoEnBaseProductos,div.listadoEnBasePRoductos li, div.listadoEnBasePRoductos a,div.listadoEnBasePRoductos ul{
+  
+    color:black;
+    text-decoration: none;
+    margin-left:2.5rem;
+    list-style: none;
+    border-color: dimgray;
+    
+}
+li ,ul {
+    list-style:none
+
+}
+#idA{
+    color:brown;
+    text-decoration: brown;
 }

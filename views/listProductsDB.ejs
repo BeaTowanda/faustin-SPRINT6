@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="/stylesheets/altaProducto.css">
         <link rel="stylesheet" href="/stylesheets/updateProducto.css">
         <link rel="stylesheet" href="/stylesheets/modalSimple.css">
+        <link rel="stylesheet" href="/stylesheets/modalFooter.css">
         <link rel="stylesheet" href="/stylesheets/listadosContenidosTablas.css">
 
         <script src="https://kit.fontawesome.com/812a77d5cc.js" crossorigin="anonymous"></script>
@@ -33,18 +34,22 @@
                 <div class="descriptionProduct"> 
                     <br/>                     
                     <p > PRODUCTOS EN BASE  </p> 
-                    <div class = "listadoEnBase">
+                    <div class = "listadoEnBaseProductos">
                     <ul>
                         <% for( let i = 0; i < array.length; i++ ) { %>
-                            <li><a href="/bproduct/detailOneDB/<%= array[i].id %>">
-                            <spam>Registro:<%= array[i].id %> <spam><%= array[i].name %><img id="archivo1" src="/images/<%=array[i].image_ppal %>"></spam></spam></a> 
-                            
-                            </li> 
-                             
+                           
+                           <!--- <li><a href="/bproduct/detailOneDB/<%= array[i].id %>"></a></li>--></spam></a> 
+                            </li>
+                            <li>Registro:<%= array[i].id %><spam >****<a id="idA" href="/bproduct/detailOneDB/<%= array[i].id %>"><%= array[i].name %></spam></a> </li>
+                            <li>Precio $:<%= array[i].price %></li>
+                            <li>Descuento %: <%= array[i].dto %></li>
+                            <li><img id="archivo1" src="/images/<%=array[i].image_ppal %>"></li>
+                                 
                             <br/> 
+                           
                         <% } %>
                     </ul> 
-                </div>                
+                </div>               
                 
                 <div id="modal2" class="modalmask">            
                     <div class="modalbox rotate">

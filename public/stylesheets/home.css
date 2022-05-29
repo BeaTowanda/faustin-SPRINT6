@@ -13,14 +13,14 @@
     font-size: medium;   
 }    
 
-.productos{     
-    flex-wrap: nowrap;  
-    
+.productos{        
+    flex-wrap: wrap;  
     display: flex;
-    margin:0 1rem 0 1rem;
-    flex-direction: row;  
-    justify-content: space-around;
-    /*align-self: stretch;*/
+    margin:1rem 1rem 1rem 1rem;
+    /*flex-direction: column;*/  
+    justify-content:space-between;
+    border-block-color: grey;
+        /*align-self: stretch;*/
 }
 .productos h3{
     font-size: 1.5rem;
@@ -36,23 +36,19 @@
     height: 12rem;
 }
 
-.derecha, .izquierda{
+.derecha{
+    background-color: aquamarine;
     margin-top: 2rem;
-    width: 50%;
-    height: 50%;   
+    width:60% ;
+    /*height: 50%; */
+    height: 30%;  
     /*box-shadow: 0px 0px 10px rgb(100, 100, 100);*/
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
    
 }
-div .producto {
-    display: flex;
-    box-shadow: 0px 0px 10px rgb(100, 100, 100);
-    margin:2rem 2rem 2rem 2rem;
-    border-radius: 2px;
-    /*background-color: blue;*/ 
-    flex-wrap: wrap;  
-    flex-direction: column;
+div.producto {  
+     margin:0.1rem 0.1rem 0.1rem 0.1rem;
 }
 /* agrego para el listado de la barra de búsqueda */
 #buscaH3 {
@@ -78,22 +74,19 @@ div .producto {
     border-radius: 5%;
     position:left;
 }
-#bandoleraCereza {
+/*#bandoleraCereza {
     width:16rem;
     height: 12rem;
-}
+}*/
 div.cajaGrande{
-    display: flex;
-    flex-wrap: wrap;
-    /*justify-content:space-around;*/
-    margin: 1rem 1rem 1rem 1rem;
-    
-
-    
+  
+    width: 50%;
+    height: 21rem;
+    margin: 1rem 1rem 0rem 1rem;   
 }
 div.cajaDetalle{
-    flex-wrap: wrap;
-    justify-content: space-between;
+   /* flex-wrap: wrap;
+    justify-content: space-between;*/
     margin-left:0.7 rem;
     color:black;
     font-size: 1rem;
@@ -178,9 +171,17 @@ div.cajaDetalle #oferta{
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: medium;
     box-sizing: content-box;
-    font-size: 50px;
-    margin-top: 80px;
+    font-size: 30px;
+    margin-top: 40px;
 }
+#distribucion{
+    -webkit-animation:spin 10s linear infinite;
+     -moz-animation:spin 7s linear infinite;
+     animation:spin2 7s linear infinite;
+}
+@-moz-keyframes spin2 { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin2 { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin2 { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 .modo-pago{
     width: 100%;
@@ -190,9 +191,9 @@ div.cajaDetalle #oferta{
     justify-content: space-around;
     font-family: Georgia, 'Times New Roman', Times, serif;
     box-sizing: content-box;
-    margin-bottom: 50px;
-    margin-top: 50px;
-    font-size: 25px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-size: 15px;
 
 }
 @media (max-width: 769px){
@@ -200,7 +201,7 @@ div.cajaDetalle #oferta{
       display:none;
     };
 }
-@media (max-width: 574px) {
+@media (max-width: 700px) {
     .bolsos1,.carteras1, .bandoleras1 ,.mochilas1{
         background-color: #FFFAF0;
         /*box-shadow: 0px 0px 10px rgb(100, 100, 100);*/
@@ -216,6 +217,9 @@ div.cajaDetalle #oferta{
     };
 }
 @media (max-width: 730px){
+    .productos{
+        flex-direction: column;
+    }
     div .producto {
         box-shadow: none;
     }
