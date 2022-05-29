@@ -1,0 +1,43 @@
+div .cartel{
+    background-color: brown;
+    color:bisque;
+    width: 15rem;
+    text-align: center;
+}
+div.cartel a{
+    list-style: none;
+    text-decoration: none;
+    color:bisque;    
+}
+
+.lineaA{
+    color:bisque;
+}
+#tituloCartel{
+    font-size: larger;
+    align-self: center;
+}
+div.categoriasProductos{
+    margin-left: 3rem;
+    color:brown;
+}
+div.categoriasProductos ul, div.categoriasProductos li,div.categoriasProductos a{
+    color:brown;
+    text-decoration: none;
+}
+.subCartel{
+    color:black;
+    text-decoration: underline;
+    background-color:khaki;
+}
+div .cartelLogin{
+    background-color:darkslategray;
+    color:bisque;
+    width: 15rem;
+    text-align: center;
+}
+div.categoriasUsuarios ul, div.categoriasUsuarios li,div.categoriasUsuarios a{
+    color:darkslategray;
+    text-decoration: none;
+    margin-left: 3rem;
+}

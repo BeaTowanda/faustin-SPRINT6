@@ -23,7 +23,7 @@
         <%- include('partials/header') %>
 <main>
         <div class="altaProductLogo">
-            <h3> LISTADO DE PRODUCTOS  </h3>
+            <h3> MODIFICAR / DAR BAJA PRODUCTOS </h3>
          <ul>      
             <li><img id="trashLogo" src ="/images/trash-can-solid.svg"></li>
             <li><a href="#modal2">Importante<i class="fas fa-user-edit"></i></a></li>
@@ -33,7 +33,9 @@
            <!--- <form action="/bproduct/delete/id?_method=DELETE" method="POST" >  --> 
                 <div class="descriptionProduct"> 
                     <br/>                     
-                    <p > PRODUCTOS EN BASE  </p> 
+                    <p > ELIJA EL PRODUCTO QUE DESEA MODIFICAR / DAR DE BAJA </p> 
+                    <br/>
+                    <br/>
                     <div class = "listadoEnBaseProductos">
                     <ul>
                         <% for( let i = 0; i < array.length; i++ ) { %>
@@ -44,6 +46,7 @@
                             <li>Precio $:<%= array[i].price %></li>
                             <li>Descuento %: <%= array[i].dto %></li>
                             <li><img id="archivo1" src="/images/<%=array[i].image_ppal %>"></li>
+                            <li id="idA" >********************************************</li>
                                  
                             <br/> 
                            

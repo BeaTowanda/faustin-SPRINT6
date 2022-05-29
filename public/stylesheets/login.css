@@ -8,6 +8,17 @@
     padding-bottom: 185px;         
    
 }
+.cuerpoLoginMarca{
+    background-image: url(/images/imagenFondoLogin-01.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 70%;
+    margin:0.5rem 2rem 0rem 3rem;
+    /*width: 1900px;*/
+    padding-bottom: 185px; 
+    text-align: center;
+
+}
 .cuerpoLogin h3{
     margin-left: 2rem;
 }

@@ -439,6 +439,9 @@ const controller = {
     //res.clearCookie("user");
     //res.redirect("/");
   },
+  laMarca: (req, res) => {
+    res.render("marcaDB");
+  }
 };
 
 module.exports = controller;

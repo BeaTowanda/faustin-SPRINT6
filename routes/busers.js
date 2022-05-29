@@ -40,7 +40,7 @@ router.post("/cambioPass/:id",validatorUserDb.cambioP,buserController.processCam
 
 //router.get("/borrar",userController.baja)
 //router.post("/borrar",validatorU.olvidoV,userController.delete)
-//* saco autoMiddle.. para ponerlo luego por ahora sin eso en producto
+
 router.get("/list",authMiddle,buserController.list);
 router.get("/detailOne/:id",buserController.detailOne)
 router.post("/updateOne/:id",validatorUserDb.updateUser,buserController.storeUpdate)
@@ -48,6 +48,7 @@ router.post("/updateOne/:id",validatorUserDb.updateUser,buserController.storeUpd
 //router.put("/userTaxes",buserController.regTaxes)
 //router.get("/cerrarSesion",userController.ConfirmLogout)
 //router.post("/cerrarSesion",userController.logout)
+router.get("/laMarca",buserController.laMarca);
 
 
 module.exports = router;
