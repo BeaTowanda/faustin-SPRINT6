@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/stylesheets/global.css">
     <link rel="stylesheet" href="/stylesheets/carritoDeCompras.css">
     <link rel="stylesheet" href="/stylesheets/home.css">
+    <link rel="stylesheet" href="/stylesheets/login.css">
     <link rel="stylesheet" href="/stylesheets/modalSimple.css">
     <link rel="stylesheet" href="/stylesheets/modalFooter.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
@@ -17,30 +18,11 @@
     <title>Carrito de Compras</title>
 </head>
 <body>
-    <!---
-    <header class="header">
-        <div class="cointainer, logo-nav-container">
-            <div class="barra">
-                <input type="text" id="searchterm" placeholder="¿Que estas buscando?" class="barra1">
-            </div>
-            <nav class="Faustine">
-                <h3> Faustine </h3>
-            </nav>
-            <nav class="imgs">
-            
-            <button><img width="50" height="50" src="images/cuadrado.jpg"></button>
-            <button><img width="50" height="50" src="images/bag.jpg"></button>
-                
-            </nav>
-
-        </div>
-    </header>-->
+  
     <%- include('partials/header') %>
 <main>
-    <div class="tituloPagina">
-   
+    <div class="tituloPagina">   
         <h2><i class="fa fa-shopping-cart" aria-hidden="true"></i> </h2>       
-
     </div>
     <section class="productosEnCarrito">
         <!--<div class="botonTriangulo"><button class="triangulo1"></button></div>-->
@@ -53,18 +35,7 @@
            <!--- <div class="botonAgregarEliminar"><input type= "button" name="producto1" id="producto1" value="+ 1 -" class="botonesAgregado"></div>-->
         </article>
         <% } %>
-       <!--- <article class="segundoProducto">
-            <div><img width="320" height="320" src="/images/bandoleraRojaSinFondo.png" alt= "Bolso"></div>
-            <div><b><label for="producto2" class="titulosdeProductos">Bolso</label></b></div>
-            <div class="botonAgregarEliminar"><input type= "button" name="producto2" id="producto2" value="+ 1 -" class="botonesAgregado"></div>
-        </article>
-        <article class="tercerProducto">
-            <div><img width="320" height="320" src="/images/cartera 2SinFondo.png" alt= "Riñonera"></div>
-            <div><b><label for="producto3" class="titulosDeProductos">Riñonera</label></b></div>
-            <div class="botonAgregarEliminar"><input type= "button" name="producto3" id="producto3" value="+ 1 -" class="botonesAgregado"></div>
-        </article>-->
-        <!--<div class="botonTriangulo"><button class="triangulo2"></button></div>-->
-
+       
     </section>
 
     <div class="botonesParaPasar">

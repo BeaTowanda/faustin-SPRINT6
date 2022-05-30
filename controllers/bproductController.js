@@ -802,7 +802,7 @@ const controller = {
     //} else {
     console.log(req.params.suma + "es la suma que recibe por params")
     let total1 = parseInt(req.params.suma);
-    console.log("y el total1 = " + total1)
+    
     try {
       // actualiza el nro de factura en JSON
       // busco el nro de factura
@@ -827,21 +827,42 @@ const controller = {
           },
         }
       );
-      console.log("el body distribucion" + req.body.costoDistribucion)
       total1 = total1 + parseInt(req.body.costoDistribucion);
       // crea la factura 
-      let factura = await db.Invoice.create({
+   /*   let factura = await db.Invoice.create({
         number: numeroFact,
         id_user: req.session.usuarioLogueado.id,
         delivery_dir: req.body.direccion,
         delivery_cost: req.body.costoDistribucion,
         total: total1,
-      });
+      });*/
+      let factura = {
+        number : numeroFact,
+        id_user: req.session.usuarioLogueado.id,
+        delivery_dir:req.body.direccion,
+        delivery_cost: req.body.costoDistribucion,
+        total:total1
+      }
+      console.log("en crea user:"+req.session.usuarioLogueado)
+      console.log("nombre usuario:" + req.session.usuarioLogueado.usuario)
+      console.log("primerNOmbre es :"+ req.session.usuarioLogueado.primerNombre)
+      res.render("carritoRegistraDB",{datos:factura,user:req.session.usuarioLogueado} )
     } // final del try
     catch (error) {
       console.log(error);
     }
     //} // final del else
+  },
+  endCompra: async(req, res) => {
+    let factura = await db.Invoice.create({
+      number: req.body.factura,
+      id_user: req.body.idUsuario,
+      delivery_dir: req.body.direccion,
+      delivery_cost: req.body.costoEnvio,
+      total: req.body.total,
+    });
+    let mensaje ="SE CREO FACTURA EXISTOSAMENTE";
+    res.render("mensajesDB",{mensaje:mensaje})
   },
   altaTaxes: (req, res) => {
     res.render("formularioTaxesDB");

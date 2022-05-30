@@ -57,8 +57,10 @@ router.post("/compra/:id",authMiddle,validatorPDB.detalleCompra,bproductControll
 //router.post("/compra/:id",authMiddle,bproductController.comprar)
 router.get("/cierraCompra/:suma",authMiddle,validatorPDB.finCompra,bproductController.finComprar)
 
+
 //router.post("/registraCompra/:suma",authMiddle,validatorSOLOProduct.finCompra,bproductController.creaFactura)
 router.post("/registraCompra/:suma",authMiddle,bproductController.creaFactura)
+router.post("/endCarrito",authMiddle,bproductController.endCompra)
 router.get("/cancelaCarrito",authMiddle,bproductController.borraCarrito)
 // impuestos
 router.get("/taxes",bproductController.altaTaxes)
