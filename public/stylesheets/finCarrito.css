@@ -14,12 +14,16 @@ div.tituloPaginaFin h2{
     font-size: 5rem;  
 }
 /********************/
-div.datosFacturacion{
+div.datosFacturacion {
     font-weight: bold;
     color:#bfa294;
     margin:5px 10px 5px 15px;
     padding:1rem;
     box-shadow: 0px 0px 10px rgb(100 100 100);  
+}
+#labelDatosFacturacion{
+    color:black;
+    font-weight: bolder;
 }
 #direccion{
     width: 60%;
@@ -71,6 +75,37 @@ div.imagenesPago label{
     width: 4rem;
     height: 4rem;
 }
+/* datos impositivos */
+div .impuestosFact{
+    width: 25%;
+    background-image: url(/images/imagenFondoLogin-01.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 70%;
+    border-width: medium;
+    border-color: cadetblue;
+    color:black;
+    align-items: left;
+    font-weight: bold;
+    margin-left: 1.5rem;
+
+}
+div.muestraTax{
+    text-align: left;
+    margin-left: 8rem;
+    color:darkslategray;
+    font-weight: bolder;
+}
+#irBaja{
+    width: 18rem;
+    background-color:coral;
+    color:black;
+    border-radius:20px;
+    text-align: center;
+    text-decoration: none;
+
+}
+
 @media (max-width: 361px){
     div.datosFacturacion{
     box-shadow:none; 

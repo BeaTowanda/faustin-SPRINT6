@@ -39,14 +39,17 @@
                    
                     <h3 id="buscaH3"><%= mensaje2 %></h3>
                     
-                    <div class = "listadoEnBaseGral">
+                    <div class = "listadoSearch-categorias">
                     <ul>
                         <% for( let i = 0; i < array.length; i++ ) { %>
-                            <li><a href="/bproduct/detalle/<%= array[i].id %>">
-                            <spam><%= array[i].name %>  <img id="archivo1" src="/images/<%=array[i].image_ppal %>"></spam></a> 
+                            <div class="listaProductoBase">
                             
-                            </li> 
-                             
+                            <li id="listaProdColor"><a href="/bproduct/detalle/<%= array[i].id %>"> <spam><%= array[i].name %> </spam></a></li>
+                            <li><img id="archivo1" src="/images/<%= array[i].image_ppal %>"></li>
+                            <li>Precio $: <%= array[i].price %></li>    
+                            <li>Descuento %: <%= array[i].dto %></li>
+
+                            </div>
                             <br/> 
                         <% } %>
                     </ul> 
@@ -56,7 +59,7 @@
                     <div class="modalbox rotate">
                         <a href="#close" title="Close" class="close">X</a>
                         <h2>IMPORTANTE</h2>
-                        <p> Clickee el tipo de producto
+                        <p> Clickee sobre el NOMBRE del producto
                             que desea Comprar/VER</p>                    
                          
                         </div>

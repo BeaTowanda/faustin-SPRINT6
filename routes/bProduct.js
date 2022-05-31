@@ -55,8 +55,7 @@ router.get("/listarProdType/:id",bproductController.prodPorType)
 router.get("/detalle/:id",authMiddle,bproductController.detail)
 router.post("/compra/:id",authMiddle,validatorPDB.detalleCompra,bproductController.comprar)
 //router.post("/compra/:id",authMiddle,bproductController.comprar)
-router.get("/cierraCompra/:suma",authMiddle,validatorPDB.finCompra,bproductController.finComprar)
-
+router.post("/cierraCompra/:suma",authMiddle,validatorPDB.finCompra,bproductController.finComprar)
 
 //router.post("/registraCompra/:suma",authMiddle,validatorSOLOProduct.finCompra,bproductController.creaFactura)
 router.post("/registraCompra/:suma",authMiddle,bproductController.creaFactura)

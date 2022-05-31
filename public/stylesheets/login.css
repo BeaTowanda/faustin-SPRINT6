@@ -23,6 +23,50 @@
     color:chocolate;
     font-weight: bolder;
 }
+/********************************/
+/*POLITICA DE CAMBIOS Y DEVOLUCIONES */
+.cuerpoLoginPolitica{
+    display: flex;
+    flex-direction: column;
+    background-image: url(/images/imagenFondoLogin-01.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 70%;
+    margin:0rem 2rem 0rem 3rem;
+    /*width: 1900px;*/
+    /*text-align: center; */
+}
+#politica{
+    color:seagreen;
+}
+div .tituloPolitica{
+    width: 60%;
+    height: 3rem;
+    border-bottom:#3D405B;
+    color:black;
+}
+div.leyConsumidor{
+    background-color: darkslategray;
+    color: bisque;
+    width: 30%;
+    height: 15%;
+}
+div.textoGarantia h3{  
+    font-size:x-large;
+    color:#3D405B;
+    text-decoration: underline;
+}
+div.textoGarantia h2{
+    font-size:large;
+    color:black
+}
+div.textoGarantia ul, div.textoGarantia li{
+    text-decoration: none;
+    color:black;
+}
+/*******************************/
+
+
 .cuerpoLogin h3{
     margin-left: 2rem;
 }

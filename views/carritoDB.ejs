@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/stylesheets/global.css">
     <link rel="stylesheet" href="/stylesheets/carritoDeCompras.css">
+    <link rel="stylesheet" href="/stylesheets/finCarrito.css">
     <link rel="stylesheet" href="/stylesheets/home.css">
     <link rel="stylesheet" href="/stylesheets/login.css">
     <link rel="stylesheet" href="/stylesheets/modalSimple.css">
@@ -22,10 +23,23 @@
     <%- include('partials/header') %>
 <main>
     <div class="tituloPagina">   
-        <h2><i class="fa fa-shopping-cart" aria-hidden="true"></i> </h2>       
+        <h2><i class="fa fa-shopping-cart" aria-hidden="true"></i> </h2> 
+        <!--TRAIGO LOS DATOS IMPOSITIVOS-->
+        <form action="/bproduct/cierraCompra/<%= suma %>" method="POST">
+         <div class="muestraTax" > 
+        <p><label id="labelDatosFacturacion" for ="taxCondicion">Condicion Impositiva : <%= impuestos.tax_condition %></label>
+            <input placeholder=""  name="taxCondicion" id="noSeVe" value="<%= impuestos.tax_condition %>"></p> 
+        <p><label id="labelDatosFacturacion" for ="taxCuit">CUIT : <%= impuestos.cuit %></label>
+            <input placeholder=""  name="taxCuit" id="noSeVe" value="<%= impuestos.cuit %>"></p>  
+        <p><label id="labelDatosFacturacion" for ="taxCuil">CUIL : <%= impuestos.cuil %></label>
+            <input placeholder=""  name="taxCuil" id="noSeVe" value="<%= impuestos.cuil %>"></p> 
+        <p><label id="labelDatosFacturacion" for ="taxBrutos">Ingresos Brutos : <%= impuestos.ingresosBrutos %></label>
+            <input placeholder=""  name="taxBrutos" id="noSeVe" value="<%= impuestos.ingresosBrutos %>"></p> 
+        <p><label id="labelDatosFacturacion" for ="usuario">Ganancias : <%= impuestos.retGanancias %></label>
+            <input placeholder=""  name="taxGanancias" id="noSeVe" value="<%= impuestos.retGanancias %>"></p>
+        </div> 
     </div>
     <section class="productosEnCarrito">
-        <!--<div class="botonTriangulo"><button class="triangulo1"></button></div>-->
         <% for (i=0 ; i< compras.length ; i++) { %>
         <article class="primerProducto">
             <div><img width="320" height="320" src="/images/<%= compras[i].itemProduct.image_ppal %>" alt= "Cartera"></div>
@@ -49,13 +63,17 @@
                 <p><a href="#modal2">Importante <i class="fas fa-user-edit"></i></p>              
                 <h3 class="totalEnvio2">Total Compra SIN IVA ni Retenciones: <spam> $ <%= suma %> </spam><h3</div>            
         </div>
+        <div class="submitMasEnviar">        
+            <input type="submit" name="submit" id="irBaja" value=" FINALIZAR COMPRA  "> </input>
+        </div>
+    </form>
         <div class="finalizar"> 
             <!--- <p> <button type="submit" class="crearCuentaBoton">CREAR CUENTA</button> -->
                 <a href="/"  id="finalizarHref">SEGUIR COMPRANDO </a>
                 <br/>
-                <br/>
+              <!---  <br/>
                 <a href="/bproduct/cierraCompra/<%= suma %>" id="finalizarHref">FINALIZAR COMPRA </a> 
-                <br/>
+                <br/>-->
                 <br/>
                 <a href="/bproduct/cancelaCarrito" id="finalizarHref">CANCELAR CARRITO </a>                
                 <br/> 

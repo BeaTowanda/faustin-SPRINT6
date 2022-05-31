@@ -23,13 +23,23 @@
 <main>
     <form action="/bproduct/registraCompra/<%= suma %>" method="POST">
     <div class="tituloPaginaFin">
-        <!--<p class="tituloPagina"><img width="40" height="40" class="logoCarrito" src="/images/logoCarritoDeCompras.png" alt= "Cartera"> -->
-            <!--<p id="logoCarrito"><i class="fa fa-shopping-cart" aria-hidden="true"></i></p> -->
             <h2><i class="fa fa-shopping-cart" aria-hidden="true"></i> </h2>       
-            <!--<h1>Carrito de Compras</h1></header>-->
             <h3 class="totalEnvio2">Sub-Total Compra: <spam> $ <%= suma %> </spam></h3>
             <input placeholder="" type="number" name="subTotal" id="noSeVe" value="<%= suma %>" ></p>
             <input placeholder="" type="number" name="nroFact" id="noSeVe" value="<%= facturacion.numero %>" ></p>
+            <div class="muestraTax">
+            <p><label id="labelDatosFacturacion" for ="taxCondicion">Condicion Impositiva : <%= impuestos.tax_condition %></label>
+                <input placeholder=""  name="taxCondicion" id="noSeVe" value="<%= impuestos.tax_condition %>"></p> 
+            <p><label id="labelDatosFacturacion" for ="taxCuit">CUIT : <%= impuestos.cuit %></label>
+                <input placeholder=""  name="taxCuit" id="noSeVe" value="<%= impuestos.cuit %>"></p>  
+            <p><label id="labelDatosFacturacion" for ="taxCuil">CUIL : <%= impuestos.cuil %></label>
+                <input placeholder=""  name="taxCuil" id="noSeVe" value="<%= impuestos.cuil %>"></p> 
+            <p><label id="labelDatosFacturacion" for ="taxBrutos">Ingresos Brutos : <%= impuestos.ingresosBrutos %></label>
+                <input placeholder=""  name="taxBrutos" id="noSeVe" value="<%= impuestos.ingresosBrutos %>"></p> 
+            <p><label id="labelDatosFacturacion" for ="usuario">Ganancias : <%= impuestos.retGanancias %></label>
+                <input placeholder=""  name="taxGanancias" id="noSeVe" value="<%= impuestos.retGanancias %>"></p>
+            </div>
+
     </div>
    <!--- <form action="/bproduct/registraCompra/<%= suma %>" method="POST"> -->
         <div class="datosFacturacion">
@@ -90,7 +100,7 @@
             
         </div>
         <div class="submitMasEnviar">          
-            <input type="submit" name="submit" id="enviar" value="CREAR Factura"> </input>
+            <input type="submit" name="submit" id="irBaja" value="CREAR Factura"> </input>
         </div>        
         <div class= "closeMain" >
         <a href="/" id="vuelvo">Volver a Pagina Principal</a>

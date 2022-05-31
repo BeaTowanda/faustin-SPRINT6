@@ -49,6 +49,7 @@ router.post("/updateOne/:id",validatorUserDb.updateUser,buserController.storeUpd
 //router.get("/cerrarSesion",userController.ConfirmLogout)
 //router.post("/cerrarSesion",userController.logout)
 router.get("/laMarca",buserController.laMarca);
+router.get("/politica",buserController.politica)
 
 
 module.exports = router;

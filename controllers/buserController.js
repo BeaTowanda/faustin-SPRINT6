@@ -441,6 +441,9 @@ const controller = {
   },
   laMarca: (req, res) => {
     res.render("marcaDB");
+  },
+  politica: (req, res) => {
+    res.render("politicaDevolucionesDB");
   }
 };
 
