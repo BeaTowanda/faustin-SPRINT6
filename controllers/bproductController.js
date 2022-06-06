@@ -137,7 +137,6 @@ const controller = {
           array: productYear,
         });
       } else {
-        
         let newYear = {
           year_name: req.body.name,
         };
@@ -352,11 +351,7 @@ const controller = {
   },
   altaProduct: (req, res) => {
     //VER LA AUTORIZACIÓN SEGURAMENTE LA PONGO EN ENLACES.. POR AHORA SIN AUTO
-    /*    let autorizacion = userModel.find(req.session.usuarioLogueado.id)       
-        if (autorizacion.categoria !== "administrador"){
-            res.send("NO ESTÁ AUTORIZADO A REALIZAR ESTA OPERACIÓN")
-        } 
-        else{res.render("altaProductoDb")}*/
+  
     // FALTA VER QUE PASA CON UN PRODUCTO QUE TIENE VARIOS COLORES . ver en VALIDATOR
     let cantidades = [];
     let colors = db.ProductColor.findAll();
@@ -448,13 +443,11 @@ const controller = {
       }
     });
   },
-  armarApi: async(req,res) =>{
-    
+  armarApi: async (req, res) => {
     let productos = await db.ProductType.findAll({
-      include:["typesP" ]  
-    })
-    return res.json(productos)
- 
+      include: ["typesP"],
+    });
+    return res.json(productos);
   },
   detailOneDB: (req, res) => {
     let producto = db.Product.findOne({
@@ -713,15 +706,15 @@ const controller = {
             // de impuesto
             /*guardo los datos de impuestos para acompañar la factura en endCarrito */
             let impuestos = {
-              id_user : impuesto.id_user,
+              id_user: impuesto.id_user,
               tax_condition: impuesto.tax_condition,
-              cuit:impuesto.cuit,
-              cuil:impuesto.cuil,
-              ingresosBrutos:impuesto.ingresosBrutos,
-              retGanancias:impuesto.retGanancias
-            }
-            // calcula todos los descuentos y el total item 
-            // revisa si hay también precio de OFERTA SEMANAL 
+              cuit: impuesto.cuit,
+              cuil: impuesto.cuil,
+              ingresosBrutos: impuesto.ingresosBrutos,
+              retGanancias: impuesto.retGanancias,
+            };
+            // calcula todos los descuentos y el total item
+            // revisa si hay también precio de OFERTA SEMANAL
             let aux3 = 0;
             let precioBody = parseInt(req.body.precio);
             let dtoBody = parseInt(req.body.descuento);
@@ -766,12 +759,14 @@ const controller = {
                 // res.json(otrasCompras)
                 montoItem = parseInt(otrasCompras[i].item_u_price);
                 suma = suma + montoItem;
-
               } // fin del if
-         
-            }  // final del for
+            } // final del for
 
-            res.render("carritoDB", { compras: otrasCompras, suma: suma,impuestos:impuestos });
+            res.render("carritoDB", {
+              compras: otrasCompras,
+              suma: suma,
+              impuestos: impuestos,
+            });
           } // el else de impuestos
         } catch (error) {
           // cierra el try
@@ -779,6 +774,103 @@ const controller = {
         }
       } // fin if errors
     } // fin usuarioLogueado
+  },
+  homeCarrito: async (req, res) => {
+   
+      if (!req.session.usuarioLogueado) {
+        res.render("loginDB");
+      } else {
+       
+          // cargo las bases que quiero usar
+          try {
+            let impuesto = await db.UserTax.findOne({
+              where: {
+                id_user: req.session.usuarioLogueado.id,
+              },
+            });
+            if (!impuesto) {
+              res.render("formularioTaxesDB");
+            } else {
+              // de impuesto
+              /*guardo los datos de impuestos para acompañar la factura en endCarrito */
+              let impuestos = {
+                id_user: impuesto.id_user,
+                tax_condition: impuesto.tax_condition,
+                cuit: impuesto.cuit,
+                cuil: impuesto.cuil,
+                ingresosBrutos: impuesto.ingresosBrutos,
+                retGanancias: impuesto.retGanancias,
+              };
+              // calcula todos los descuentos y el total item
+              // revisa si hay también precio de OFERTA SEMANAL
+              /*let aux3 = 0;
+              let precioBody = parseInt(req.body.precio);
+              let dtoBody = parseInt(req.body.descuento);
+              let precioSub = precioBody * parseInt(req.body.cantidadProducto);
+              let dto = 100 - dtoBody;
+              let aux2 = 0;
+              aux3 = dto * 0.01;
+              let aux1 = precioSub * aux3;
+              if (req.body.ofertaSem != undefined) {
+                let saleBody = parseInt(req.body.ofertaSem);
+                let sale = 100 - saleBody;
+                aux3 = sale * 0.01;
+                aux2 = aux1 * aux3;
+              } else {
+                // de ofertaSem
+                aux2 = aux1;
+              }
+              // termina los cálculos precio unitario
+              let compra = await db.InvoiceItem.create({
+                id_product: req.params.id,
+                quantity: req.body.cantidadProducto,
+                item_u_price: aux2,
+                id_user: req.session.usuarioLogueado.id,
+                made: 0,
+              }); */
+              let otrasCompras = await db.InvoiceItem.findAll({
+                where: {
+                  id_user: req.session.usuarioLogueado.id,
+                  made: 0,
+                },
+                include: ["itemProduct"],
+              });
+              if ( otrasCompras.length === 0 ){
+                let mensaje = "No tiene compras en CARRITO , elija un producto e inicie la compra";
+                 res.render("mensajesDB", { mensaje: mensaje });
+              }
+              else { // SI tiene compras en carrito 
+              //return res.json(otrasCompras)
+            
+                let suma = 0;
+                let montoItem = 0;
+                //return res.json(otrasCompras)
+                for (i = 0; i < otrasCompras.length; i++) {
+                  if (
+                    otrasCompras[i].item_u_price !== 0 ||
+                    otrasCompras[i].item_u_price !== undefined
+                  ) {
+                  // res.json(otrasCompras)
+                  montoItem = parseInt(otrasCompras[i].item_u_price);
+                  suma = suma + montoItem;
+                 } // fin del if
+                } // final del for
+  
+              res.render("carritoDB", {
+                compras: otrasCompras,
+                suma: suma,
+                impuestos: impuestos,
+              });
+            } // else de si no tiene compras
+            
+            } // el else de impuestos
+          } catch (error) {
+            // cierra el try
+            console.log(error);
+          }
+        
+      } // fin usuarioLogueado
+    
   },
   borraCarrito: (req, res) => {
     if (req.session.usuarioLogueado.id) {
@@ -799,25 +891,22 @@ const controller = {
   finComprar: (req, res) => {
     let row = productModel.find(0);
     let suma = parseInt(req.params.suma);
-    let impuestos={
-      tax_condition:req.body.taxCondicion,
-      cuit:req.body.taxCuit,
-      cuil:req.body.taxCuil,
-      ingresosBrutos:req.body.taxBrutos,
-      retGanancias:req.body.taxGanancias
-    }
-    res.render("finCarritoDB", { facturacion: row, suma: suma,impuestos:impuestos });
+    let impuestos = {
+      tax_condition: req.body.taxCondicion,
+      cuit: req.body.taxCuit,
+      cuil: req.body.taxCuil,
+      ingresosBrutos: req.body.taxBrutos,
+      retGanancias: req.body.taxGanancias,
+    };
+    res.render("finCarritoDB", {
+      facturacion: row,
+      suma: suma,
+      impuestos: impuestos,
+    });
   },
   creaFactura: async (req, res) => {
-    // falta validationResults
-    //const errors = validationResult(req);
-
-    //if (errors.errors.length > 0) {
-    // res.render("finCarritoDB", { errorsProd: errors });
-    //} else {
- 
     let total1 = parseInt(req.params.suma);
-    
+
     try {
       // actualiza el nro de factura en JSON
       // busco el nro de factura
@@ -832,24 +921,23 @@ const controller = {
       productModel.update(facturaData);
       /*arma datos Factura*/
       let factura = {
-        number : numeroFact,
+        number: numeroFact,
         id_user: req.session.usuarioLogueado.id,
-        delivery_dir:req.body.direccion,
+        delivery_dir: req.body.direccion,
         delivery_cost: req.body.costoDistribucion,
-        total:total1
-      }
+        total: total1,
+      };
       /*guardo los datos de impuestos para acompañar la factura en endCarrito */
       let impuestos = {
-        
         tax_condition: req.body.taxCondicion,
-        cuit:req.body.taxCuit,
-        cuil:req.body.taxCuil,
-        ingresosBrutos:req.body.taxBrutos,
-        retGanancias:req.body.taxGanancias
-      }
+        cuit: req.body.taxCuit,
+        cuil: req.body.taxCuil,
+        ingresosBrutos: req.body.taxBrutos,
+        retGanancias: req.body.taxGanancias,
+      };
       /*arma datos impositivos */
-      
-   // actualiza el numero en invoiceItem
+
+      // actualiza el numero en invoiceItem
       let item = await db.InvoiceItem.update(
         {
           made: numeroFact,
@@ -862,22 +950,19 @@ const controller = {
         }
       );
       total1 = total1 + parseInt(req.body.costoDistribucion);
-      // crea la factura 
-   /*   let factura = await db.Invoice.create({
-        number: numeroFact,
-        id_user: req.session.usuarioLogueado.id,
-        delivery_dir: req.body.direccion,
-        delivery_cost: req.body.costoDistribucion,
-        total: total1,
-      });*/
-      res.render("carritoRegistraDB",{datos:factura,user:req.session.usuarioLogueado,impuestos:impuestos} )
-    } // final del try
-    catch (error) {
+
+      res.render("carritoRegistraDB", {
+        datos: factura,
+        user: req.session.usuarioLogueado,
+        impuestos: impuestos,
+      });
+    } catch (error) {
+      // final del try
       console.log(error);
     }
     //} // final del else
   },
-  endCompra: async(req, res) => {
+  endCompra: async (req, res) => {
     let factura = await db.Invoice.create({
       number: req.body.factura,
       id_user: req.body.idUsuario,
@@ -885,8 +970,8 @@ const controller = {
       delivery_cost: req.body.costoEnvio,
       total: req.body.total,
     });
-    let mensaje ="SE CREO FACTURA EXISTOSAMENTE";
-    res.render("mensajesDB",{mensaje:mensaje})
+    let mensaje = "SE CREO FACTURA EXISTOSAMENTE";
+    res.render("mensajesDB", { mensaje: mensaje });
   },
   altaTaxes: (req, res) => {
     res.render("formularioTaxesDB");
@@ -928,7 +1013,7 @@ const controller = {
       include: ["pType"],
     }).then(function (products) {
       if (products) {
-        let mensaje2 = "";
+        let mensaje2 = products[0].pType.type_name;
         let mensaje = "TIPOS DE PRODUCTOS ";
         //return res.json(products)
         res.render("listProductGRALDB", {
@@ -1031,12 +1116,9 @@ const controller = {
     } // fin del else
   },
   search: (req, res) => {
-    //console.log(req.query.busca[o])
-    //console.log("en el query viene... " + req.query.busca);
     let verprimera = req.query.busca.split(" ");
     let busca1 = verprimera[0];
     let idBusca = verprimera[1];
-    //console.log("la primer letra es " + verprimera[0]);
     switch (busca1) {
       case "C":
         db.Product.findAll({
@@ -1046,18 +1128,17 @@ const controller = {
           include: ["pType", "pColection", "pYear", "coloresDB"],
         }).then(function (products) {
           // if(req.query.nombre == "todos"){
-          if(products.length >0){
-          let mensaje = "Productos según Colección ";
-          mensaje2 = products[0].pColection.colection_name;
-          res.render("listProductGRALDB", {
-            array: products,
-            mensaje: mensaje,
-            mensaje2: mensaje2,
-          }); }
-          else{
-            let mensaje =
-            "No Hay productos que coincidan con su BÚSQUEDA";
-          res.render("mensajesDB", { mensaje: mensaje });
+          if (products.length > 0) {
+            let mensaje = "Productos según Colección ";
+            mensaje2 = products[0].pColection.colection_name;
+            res.render("listProductGRALDB", {
+              array: products,
+              mensaje: mensaje,
+              mensaje2: mensaje2,
+            });
+          } else {
+            let mensaje = "No Hay productos que coincidan con su BÚSQUEDA";
+            res.render("mensajesDB", { mensaje: mensaje });
           }
         });
         break;
@@ -1069,18 +1150,17 @@ const controller = {
           include: ["pType", "pColection", "pYear", "coloresDB"],
         }).then(function (products) {
           // if(req.query.nombre == "todos"){
-          if (products.length > 0){
-          let mensaje = "Tu Selección de Productos por Año Lanzamiento";
-          let mensaje2 = products[0].pYear.year_name;
-          res.render("listProductGRALDB", {
-            array: products,
-            mensaje: mensaje,
-            mensaje2: mensaje2,
-          });}
-          else{
-            let mensaje =
-            "NO hay productos que coincidan con su BÚSQUEDA ";
-          res.render("mensajesDB", { mensaje: mensaje });
+          if (products.length > 0) {
+            let mensaje = "Tu Selección de Productos por Año Lanzamiento";
+            let mensaje2 = products[0].pYear.year_name;
+            res.render("listProductGRALDB", {
+              array: products,
+              mensaje: mensaje,
+              mensaje2: mensaje2,
+            });
+          } else {
+            let mensaje = "NO hay productos que coincidan con su BÚSQUEDA ";
+            res.render("mensajesDB", { mensaje: mensaje });
           }
           // return res.json(products)
         });
@@ -1093,18 +1173,17 @@ const controller = {
           include: ["pType", "pColection", "pYear", "coloresDB"],
         }).then(function (products) {
           // if(req.query.nombre == "todos"){
-          if(products.length >0){
-          let mensaje = "Tu Selección de Productos ";
-          let mensaje2 = products[0].pType.type_name;
-          res.render("listProductGRALDB", {
-            array: products,
-            mensaje: mensaje,
-            mensaje2: mensaje2,
-          });}
-          else{
-            let mensaje =
-            "NO hay productos que coincidan con su BÚSQUEDA ";
-          res.render("mensajesDB", { mensaje: mensaje });
+          if (products.length > 0) {
+            let mensaje = "Tu Selección de Productos ";
+            let mensaje2 = products[0].pType.type_name;
+            res.render("listProductGRALDB", {
+              array: products,
+              mensaje: mensaje,
+              mensaje2: mensaje2,
+            });
+          } else {
+            let mensaje = "NO hay productos que coincidan con su BÚSQUEDA ";
+            res.render("mensajesDB", { mensaje: mensaje });
           }
           //return res.json(products)
         });
@@ -1147,11 +1226,6 @@ const controller = {
     console.log("en probar ver que hay en req.session");
     console.log("el id" + req.session.usuarioLogueado);
     console.log("el producto" + req.session.usuarioLogueado);
-
-    /* let producto = db.Product.findAll({
-   
-  }*/
-    //)}
   },
 };
 

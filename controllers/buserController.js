@@ -10,7 +10,6 @@ const { redirect } = require("express/lib/response");
 const db = require("../src/database/models");
 const sequelize = db.sequelize;
 
-
 function validarContraseña(userID, bodycontraseña) {
   let contraseñaGuardada = userID.password;
   return bcrypt.compareSync(bodycontraseña, contraseñaGuardada);
@@ -90,7 +89,7 @@ const controller = {
     if (errors.errors.length > 0) {
       res.render("loginDB", { errorsLogin: errors.mapped() });
     }
-   
+
     db.User.findOne({
       where: {
         userName: req.body.usuario,
@@ -98,7 +97,6 @@ const controller = {
     }).then(function (user) {
       // return ({
       if (user) {
-     
         let bodycontraseña = req.body.contraseña;
         //let result = validarContraseña(user, bodycontraseña);
         //console.log(result);
@@ -112,7 +110,7 @@ const controller = {
               apellido: user.last_name,
               mail: user.email,
               categoria: user.id_category,
-              cproduct :0,
+              cproduct: 0,
               //avatar: userFound.avatar,
             };
             req.session.usuarioLogueado = userlog;
@@ -124,8 +122,8 @@ const controller = {
             res.redirect("/");
           }
         } else {
-          let mensaje = "Credenciales Incorrectas"
-          res.render("mensajesDBuser",{mensaje:mensaje});
+          let mensaje = "Credenciales Incorrectas";
+          res.render("mensajesDBuser", { mensaje: mensaje });
         }
       }
     });
@@ -149,11 +147,10 @@ const controller = {
   altaRegister: (req, res) => {
     let errors = [];
     errors = validationResult(req);
-  
+
     if (errors.errors.length > 0) {
       return res.render("formularioRegistroDb", { errorsReg: errors.mapped() });
     } else {
-      
       db.UserCategory.findOne({
         where: {
           category_name: req.body.categoria,
@@ -171,13 +168,9 @@ const controller = {
           password: bcrypt.hashSync(req.body.contraseña, 10),
           avatar: req.file ? req.file.filename : "DEFAULT.jpg",
         });
-        //.then (function(){
-        //  res.send("alta existosa") } )
       });
     }
     res.redirect("/busers/login");
-    //res.redirect("/")
-    //res.render("loginDB")
   },
   list: function (req, res) {
     db.User.findOne({
@@ -211,49 +204,47 @@ const controller = {
   storeUpdate: function (req, res) {
     let id = req.params.id;
     console.log(id + "  es el id a modificar estoy en detailOne");
-    let errors =[];
-        errors = validationResult(req);   
-        if(errors.errors.length > 0){
-            let usuario = db.User.findOne({
-                where: {
-                  id: req.params.id,
-                },
-              });
-              let categorias = db.UserCategory.findAll();
-              Promise.all([usuario, categorias]).then(function ([user, categorias]) {
-                return res.render("updateUsuarioDB", {
-                  user: user,
-                  categorias:categorias,
-                  errorsUp: errors.mapped()
-                });
-              });
-           //return res.render("updateUsuarioDB", {errorsUp: errors.mapped()})
-        } else {
-    db.User.update(
-      {
-        first_name: req.body.primerNombre,
-        last_name: req.body.apellido,
-        email: req.body.mail,
-        //avatar: req.body.avatar,
-        bornDate: req.body.fechaNacimiento,
-        id_category: req.body.categoria,
-      },
-      {
+    let errors = [];
+    errors = validationResult(req);
+    if (errors.errors.length > 0) {
+      let usuario = db.User.findOne({
         where: {
           id: req.params.id,
         },
-      }
-    )
-      .then(function () {
-        return db.User.findByPk(req.params.id);
-      })
-      .then(function () {
-        let mensaje= "Modificación exitosa" 
-        return res.render("mensajesDBuser",{mensaje:mensaje});
       });
-      ////******* ahora actualizo la tabla PRODUCTCOLORPRODUCT
-      
+      let categorias = db.UserCategory.findAll();
+      Promise.all([usuario, categorias]).then(function ([user, categorias]) {
+        return res.render("updateUsuarioDB", {
+          user: user,
+          categorias: categorias,
+          errorsUp: errors.mapped(),
+        });
+      });
+    } else {
+      db.User.update(
+        {
+          first_name: req.body.primerNombre,
+          last_name: req.body.apellido,
+          email: req.body.mail,
+          //avatar: req.body.avatar,
+          bornDate: req.body.fechaNacimiento,
+          id_category: req.body.categoria,
+        },
+        {
+          where: {
+            id: req.params.id,
+          },
         }
+      )
+        .then(function () {
+          return db.User.findByPk(req.params.id);
+        })
+        .then(function () {
+          let mensaje = "Modificación exitosa";
+          return res.render("mensajesDBuser", { mensaje: mensaje });
+        });
+      ////******* ahora actualizo la tabla PRODUCTCOLORPRODUCT
+    }
   },
   baja: function (req, res) {
     // usuario = session.usuarioLogueado.usuario
@@ -321,8 +312,8 @@ const controller = {
             //res.redirect("/");
           }
         } else {
-          let mensaje= "Credenciales Incorrectas"
-          res.render("mensajesDBuser",{mensaje:mensaje});
+          let mensaje = "Credenciales Incorrectas";
+          res.render("mensajesDBuser", { mensaje: mensaje });
         }
       }
     });
@@ -371,8 +362,8 @@ const controller = {
         res.render("loginCambiaPassDB", { user: user });
       }
     } else {
-      let mensaje= "Credenciales Incorrectas"
-      res.send("mensajesDBuser",{mensaje:mensaje});
+      let mensaje = "Credenciales Incorrectas";
+      res.send("mensajesDBuser", { mensaje: mensaje });
     }
   },
   processCambioP: (req, res) => {
@@ -390,8 +381,8 @@ const controller = {
     //let userID =  userModel.find(req.session.usuarioLogueado.id);
     db.User.findByPk(req.session.usuarioLogueado.id).then(function (user) {
       if (user && validarContraseña(user, req.body.contraseña1)) {
-        let mensaje = "NUEVA CONTRASEÑA deber ser DIFERENTE a la registrada"
-        res.render("mensajesDBuser",{mensaje:mensaje});
+        let mensaje = "NUEVA CONTRASEÑA deber ser DIFERENTE a la registrada";
+        res.render("mensajesDBuser", { mensaje: mensaje });
       } else {
         db.User.update(
           {
@@ -413,38 +404,51 @@ const controller = {
             return db.User.findByPk(req.session.usuarioLogueado.id);
           })
           .then(function () {
-            let mensaje ="Se Ha realizado cambio de contraseña"
-            return res.render("mensajesDBuser",{mensaje:mensaje});
+            let mensaje = "Se Ha realizado cambio de contraseña";
+            return res.render("mensajesDBuser", { mensaje: mensaje });
           });
       }
     });
     res.redirect("/");
   },
-  
+
   regTaxes: function (req, res) {
     // usuario = session.usuarioLogueado.usuario
-    // console.log(usuario + "  es el req.session.usuario")
     // res.render("confirmaLogout")
     res.render("formularioTaxesDB");
   },
-  ConfirmLogout: function (req, res) {
-    // usuario = session.usuarioLogueado.usuario
-    // console.log(usuario + "  es el req.session.usuario")
-    // res.render("confirmaLogout")
-    res.send("LOGOUT EN CONSTRUCCIÓN ");
-  },
-  logout: function (req, res) {
-    res.send("LOGOUT EN CONSTRUCCIÓN ");
-    //req.session.destroy();
-    //res.clearCookie("user");
-    //res.redirect("/");
-  },
+ 
   laMarca: (req, res) => {
     res.render("marcaDB");
   },
   politica: (req, res) => {
     res.render("politicaDevolucionesDB");
-  }
+  },
+  confirmLogout: async (req, res) => {
+    console.log(req.session.usuarioLogueado)
+    if (req.session.usuarioLogueado !== undefined){
+        let usuario = await db.User.findOne({
+          where:{
+            id:req.session.usuarioLogueado.id
+          }
+        })  
+        res.render("confirmLogout",{datos:usuario})
+    }
+    else{
+      let mensaje = "Ud. NO está logueado al momento ";
+      res.render("mensajesDB", { mensaje: mensaje });
+      
+    }
+
+ },          
+logout:function(req, res){  
+    id= req.body.usuario;
+    req.session.destroy();      
+    res.clearCookie("usercookie",id);
+    let mensaje = "operación LOGOUT existosa";
+    res.render("mensajesDB", { mensaje: mensaje });
+    
+}
 };
 
 module.exports = controller;

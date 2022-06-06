@@ -262,9 +262,11 @@ const controller = {
      },          
     logout:function(req, res){
         res.send("LOGOUT EN CONSTRUCCIÓN ")
-        //req.session.destroy();       
-        //res.clearCookie("user");
-        //res.redirect("/");
+        id= req.session.usuarioLogueado.id
+        req.session.destroy();   
+        //res.cookie("usercookie", user.id, { maxAge: 50000 * 24 });    
+        res.clearCookie("usercookie",id);
+        res.redirect("/");
     }
 };
 

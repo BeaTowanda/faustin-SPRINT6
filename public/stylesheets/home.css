@@ -196,6 +196,10 @@ div.cajaDetalle #oferta{
     font-size: 15px;
 
 }
+#imagenFolk{
+    width: 10rem;
+    height: 9.5em;
+}
 @media (max-width: 769px){
     footer{
       display:none;

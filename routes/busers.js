@@ -46,8 +46,8 @@ router.get("/detailOne/:id",buserController.detailOne)
 router.post("/updateOne/:id",validatorUserDb.updateUser,buserController.storeUpdate)
 //*** datos IMPOSITIVOS Y TARJETAS taxes lo proceso desde bproducController */
 //router.put("/userTaxes",buserController.regTaxes)
-//router.get("/cerrarSesion",userController.ConfirmLogout)
-//router.post("/cerrarSesion",userController.logout)
+router.get("/cerrarSesion",buserController.confirmLogout)
+router.post("/cerrarSesion",buserController.logout)
 router.get("/laMarca",buserController.laMarca);
 router.get("/politica",buserController.politica)
 

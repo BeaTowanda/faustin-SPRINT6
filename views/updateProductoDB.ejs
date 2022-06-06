@@ -109,11 +109,6 @@
                         <% } %>
                         <p id="mensajeRestriccion">no pueden ser modificados</p>   
                         <br/>
-                   <!---     <p> COLORES ACTIVOS seleccione:</p>
-                     <% for (i=0; i < colors.length; i++){ %>
-                      <input type="checkbox" name="colores" value="<%= colors[i].id %>"><label><%= colors[i].id %> <%= colors[i].color_name %></label>
-  
-                    <% } %>-->
                     <% if(locals.errorsProd && locals.errorsProd.color){ %>
                         <br/>
                         <p id="errorMsge"> <%= errorsProd.color.msg  %> </p>
@@ -202,13 +197,9 @@
 </main>
 </body>
         <footer>
-                         
-           <!--</header> -->
-          <!-- cambio el footer más arribA -->
-          <!--<footer>-->
 
             <%- include('partials/footer') %>
                
-           </footer>     
+        </footer>     
        
-   </html > 
+</html > 

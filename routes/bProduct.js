@@ -54,8 +54,9 @@ router.get("/listarProdType/:id",bproductController.prodPorType)
 // proceso de compra 
 router.get("/detalle/:id",authMiddle,bproductController.detail)
 router.post("/compra/:id",authMiddle,validatorPDB.detalleCompra,bproductController.comprar)
-//router.post("/compra/:id",authMiddle,bproductController.comprar)
 router.post("/cierraCompra/:suma",authMiddle,validatorPDB.finCompra,bproductController.finComprar)
+//
+router.get("/carritoHome",authMiddle,bproductController.homeCarrito)
 
 //router.post("/registraCompra/:suma",authMiddle,validatorSOLOProduct.finCompra,bproductController.creaFactura)
 router.post("/registraCompra/:suma",authMiddle,bproductController.creaFactura)
