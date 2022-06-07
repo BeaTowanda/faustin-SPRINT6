@@ -281,7 +281,7 @@ const apis = {
      
     };
     
-     res.json(productSeePJson);
+     return res.json(productSeePJson);
   },
 };
 

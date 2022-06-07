@@ -181,7 +181,9 @@ const controller = {
       if (user.id_category !== 2) {
         res.send("NO ESTÁ AUTORIZADO A REALIZAR ESTA OPERACIÓN");
       } else {
-        db.User.findAll().then(function (users) {
+        db.User.findAll({
+          include:["pCategory"]
+        }).then(function (users) {
           res.render("listUsuariosDB", { array: users });
         });
       }

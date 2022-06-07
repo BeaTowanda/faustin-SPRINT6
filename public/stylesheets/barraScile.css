@@ -40,18 +40,18 @@ bodyB {
     }
   }
   .slider {
-    background: white;
+    background: #86ad9a;
     box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
-    height: 100px;
+    height: 120px;
     margin: auto;
     overflow: hidden;
     position: relative;
     width: 1200px;
   }
   .slider::before, .slider::after {
-    background: linear-gradient(to right, white 0%, rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(to right,#9a9a9a 0%, rgba(255, 255, 255, 0) 100%);
     content: "";
-    height: 100px;
+    height: 120px;
     position: absolute;
     width: 200px;
     z-index: 2;

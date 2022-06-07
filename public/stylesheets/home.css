@@ -78,12 +78,45 @@ div.producto {
     width:16rem;
     height: 12rem;
 }*/
-div.cajaGrande{
+/*iv.cajaGrande{
   
     width: 50%;
     height: 21rem;
     margin: 1rem 1rem 0rem 1rem;   
+}*/
+/******************************************/
+div.cajaGrande{
+  
+    /*aquí modifiqué a 21 rem*/
+    width: 18rem;
+    height: 21rem;
+    margin: 1rem 1rem 1rem 1rem;   
 }
+div.cajaGrande img{
+    width: 14rem;
+    height: 12rem;
+    padding:10px;
+}
+/*creo otra caja para la imagen de los dos primeros que sale mal*/
+div.cajaGrandeA{
+   
+    /*aquí modifiqué a 21 rem*/
+    width: 18rem;
+    height: 21rem;
+    margin: 1rem 1rem 1rem 1rem;   
+}
+div.cajaGrandeA img{
+    width: 18rem;
+    height: 12rem;
+    padding:9px;
+}
+#zoom{
+    transition: transform 1s; 
+}
+#zoom:hover{
+    transform: scale(1.81);
+}
+/*++++++++++++++++++++++++++++++++++++*/
 div.cajaDetalle{
    /* flex-wrap: wrap;
     justify-content: space-between;*/

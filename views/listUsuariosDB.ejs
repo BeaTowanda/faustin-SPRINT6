@@ -44,7 +44,7 @@
             <% for( let i = 0; i < array.length; i++ ) { %>
             <li> <img id="imgAvatar" src="/images/avatars/<%= array[i].avatar %>" >
             
-            <a href="/busers/detailOne/<%= array[i].id %>"><%= array[i].userName %>  <%= array[i].id_category %></a>
+            <a href="/busers/detailOne/<%= array[i].id %>"><%= array[i].userName %>    Categoría:<%= array[i].pCategory.category_name %></a>
 
             </li>
             <% } %> 
