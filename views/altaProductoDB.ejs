@@ -31,13 +31,13 @@
             <form action="/bproduct/creaProduct?_method=PUT" method="POST" >  
                 <div class="descriptionProduct">
                     <p><label id="" for ="nombreProducto">NOMBRE DEL PRODUCTO</label>
-                    <input placeholder="" type="text"  name="name" id="user1" ></p>
+                    <input class="name" placeholder="" type="text"  name="name" id="user1" ></p>
                     <% if(locals.errorsProd && locals.errorsProd.name){ %>
                         <span id="errorMsge" > <%= errorsProd.name.msg  %> </span>
                       <% } %> 
                     <br/>
                     <p><label id="" for ="descripcionProducto">DESCRIPCION PRINCIPAL </label>
-                        <input placeholder="" type="text"  name="description" id="user1" ></p>
+                        <input class="desc" placeholder="" type="text"  name="description" id="user1" ></p>
                     <% if(locals.errorsProd && locals.errorsProd.description){ %>
                         <span id="errorMsge" > <%= errorsProd.description.msg  %> </span>
                     <% } %>       
@@ -51,7 +51,7 @@
                     
                     <label id="" for="imagenPPAL">Imagen Principal del Producto</label>
                  <!--   <input type="file" name="imagenPPAL" id="archivo" accept=".png, .jpeg, .jpg, .gif" sytle="display:none">--> 
-                    <input placeholder="" type="text" name="imagenPPAL" id="archivo" value="">
+                    <input clas="img23" placeholder="" type="text" name="imagenPPAL" id="archivo" value="">
                     <br/>  
                     <label id="" for="imagenDORSO">Imagen DORSO del Producto</label>
                     <input placeholder="" type="text" name="imagenDORSO" id="archivo" value=""> 
@@ -132,7 +132,7 @@
                     <div class="productValores">            
                     <div class="otrosValores">
                         <p><label id="" for ="precioProducto">PRECIO</label>
-                        <input placeholder="" type="number"  name="price" id="user" ></p>
+                        <input class="price" placeholder="" type="number"  name="price" id="user" ></p>
                     <% if(locals.errorsProd && locals.errorsProd.price){ %>
                         <span id="errorMsge" > <%= errorsProd.price.msg  %> </span>
                     <% } %> 
@@ -142,7 +142,7 @@
                         <h2><a href="#modal4"><img id="sale" src="/images/icono.sale.png"></a></h2>
                        
                         <p><label id="" for ="ofertaPorcentaje">DESCUENTO</label>
-                            <input placeholder="" type="number"  name="descuento" id="user"></p>
+                            <input clas= "descuento" placeholder="" type="number"  name="descuento" id="user"></p>
                     <% if(locals.errorsProd && locals.errorsProd.descuento){ %>
                             <span id="errorMsge" > <%= errorsProd.descuento.msg  %> </span>
                     <% } %> 
@@ -182,6 +182,7 @@
         </form>
          
 </main>
+<script src="/js/altaProd.js"></script> 
 </body>
         <footer>
             <%- include('partials/footer') %>               

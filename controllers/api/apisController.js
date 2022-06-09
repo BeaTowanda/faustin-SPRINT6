@@ -261,7 +261,9 @@ const apis = {
       order: [["id", "DESC"]],
       include: ["pYear", "pColection", "coloresDB", "pType"],
     });
-   //res.json(productSeeP)
+    
+   //return res.json(productSeeP)
+   
     let productSeePJson = {
       meta: {
         status: 200,
@@ -283,6 +285,47 @@ const apis = {
     
      return res.json(productSeePJson);
   },
+  ultimaCompra: async function (req, res) {
+    let products = await db.Product.findAll({
+      limit: 1,
+      order: [["id", "DESC"]],
+      include: ["pYear", "pColection", "coloresDB", "pType"],
+    });
+    console.log(products[0].id)
+   //return res.json(products)
+   
+   let producto= products[0].id
+   console.log("producto= "+ producto)
+   let compras = await db.InvoiceItem.findAll({
+     where:{
+       id_product : producto
+     }
+   })
+   compras.forEach((compra) => {
+    compra.setDataValue("endpoint", "/api/compraUltima/" + compra.id);
+  });
+   //res.json(compras)
+    let jsonCompras = {
+      meta: {
+        status: 200,
+        total_compras:compras.length,
+        url: "/api/compraUltima"
+      },
+      data: {compras}
+      //  name:productSeeP.name,
+      //  description:productSeeP.description,
+      //  description2:productSeeP.description2,
+      //  price:productSeeP.price,
+       // dto:productSeeP.dto,
+       // pType:productSeeP.pType,
+      //  pColection:productSeeP.pColection,
+      //  pYear:productSeeP.pYear
+      //},
+     
+    };
+    
+     return res.json(jsonCompras);
+  }
 };
 
 module.exports = apis;

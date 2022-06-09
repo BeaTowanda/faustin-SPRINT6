@@ -19,6 +19,7 @@ router.get("/products/:id", apisController.productDetail);
 router.post("/cart/update", apisController.updateCart);
 //
 router.get("/productUltimo",apisController.productSee)
+router.get("/compraUltima",apisController.ultimaCompra)
 //router.post("/users/checkPassword", apisController.checkPassword)
 //router.post("/users/updatePassword" , apisController.updatePassword);
 module.exports = router;

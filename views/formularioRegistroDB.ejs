@@ -26,50 +26,50 @@
         
         <form  action="/busers/register?_method=PUT" enctype="multipart/form-data" method="POST" >
             <p><label id="" for ="usuario" class="todosLosTitulos">Usuario</label>
-                <input class="todosLosBotones" placeholder="" type="text"  name="usuario" ></p>
+                <input id="user" class="todosLosBotones" placeholder="" type="text"  name="usuario" ></p>
                 <% if(locals.errorsReg && locals.errorsReg.usuario){ %>
                     <span id="errorMsge" > <%= errorsReg.usuario.msg  %> </span>
                   <% } %> 
                 <br/>
             <!--<div class="contenedorTodosLosTitulos">-->
                 <p><label id="" for ="nombre" class="todosLosTitulos">Nombre</label>
-                <input class="todosLosBotones" placeholder="" type="text"  name="primerNombre" ></p> 
+                <input id="name" class="todosLosBotones" placeholder="" type="text"  name="primerNombre" ></p> 
                 <% if(locals.errorsReg && locals.errorsReg.primerNombre){ %>
                     <span id="errorMsge" > <%= errorsReg.primerNombre.msg  %> </span>
                   <% } %> 
                 <br/>   
                 
                 <p><label id="" for ="apellido" class="todosLosTitulos">Apellido</label>
-                <input class="todosLosBotones" placeholder="" type="text"  name="apellido" ></p> 
+                <input id="surname" class="todosLosBotones" placeholder="" type="text"  name="apellido" ></p> 
                 <% if(locals.errorsReg && locals.errorsReg.apellido){ %>
                     <span id="errorMsge" > <%= errorsReg.apellido.msg  %> </span>
                   <% } %> 
                 <br/>   
                 
                 <p><label id="" for ="contraseña" class="todosLosTitulos">Contraseña</label>
-                <input class="todosLosBotones" placeholder="" type="password"  name="contraseña"></p>
+                <input id="pass" class="todosLosBotones" placeholder="" type="password"  name="contraseña"></p>
                 <% if(locals.errorsReg && locals.errorsReg.contraseña){ %>
                     <span id="errorMsge" > <%= errorsReg.contraseña.msg  %> </span>
                   <% } %> 
                 <br/>                 
                 
                 <p><label id="" for ="email" class="todosLosTitulos">Correo Electrónico</label>
-                <input class="todosLosBotones" placeholder="" type="text"  name="mail" ></p>
+                <input id="email" class="todosLosBotones" placeholder="" type="text"  name="mail" ></p>
                 <% if(locals.errorsReg && locals.errorsReg.mail){ %>
                     <span id="errorMsge" > <%= errorsReg.mail.msg  %> </span>
                   <% } %> 
                 <br/> 
                 <p><label id="" for="file">Ingresá tu AVATAR</label>
-                    <input class="todosLosBotones" type="file" name="avatar" id="archivo" accept=".png, .jpeg, .jpg, .gif" sytle="display:none"> </p>
+                    <input id="avatar" class="todosLosBotones" type="file" name="avatar" id="archivo" accept=".png, .jpeg, .jpg, .gif" sytle="display:none"> </p>
                 
                 <p><label id="" for="fechaNacimiento">Fecha de Nacimiento</label>
-                    <input class="todosLosBotones" type="date" name="fechaNacimiento" id="archivo"> </p>
+                    <input id="born" class="todosLosBotones" type="date" name="fechaNacimiento" id="archivo"> </p>
                 <% if(locals.errorsReg && locals.errorsReg.fechaNacimiento){ %>
                     <span id="errorMsge" > <%= errorsReg.fechaNacimiento.msg  %> </span>
                  <% } %> 
                     <br/>
                 <p><label id="" for="categoria">Categoria</label>
-                    <input class="todosLosBotones" type="text" name="categoria" id="archivo"> </p>
+                    <input id="cat" class="todosLosBotones" type="text" name="categoria" id="archivo"> </p>
                 <% if(locals.errorsReg && locals.errorsReg.categoria){ %>
                     <span id="errorMsge" > <%= errorsReg.categoria.msg  %> </span>
                 <% } %> 
@@ -99,6 +99,6 @@
     <footer>
         <%- include('partials/footer') %>         
     </footer>
-    
+    <script src="/js/formRegister.js"></script>   
 </body>
 </html>

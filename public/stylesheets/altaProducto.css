@@ -312,5 +312,9 @@ div .closeMainDetalle {
     height: 5rem;
  
 }*/
- 
+div.errores ul{
+    color: red;
+    list-style: none;
+    font-size: 1rem;
+}
  

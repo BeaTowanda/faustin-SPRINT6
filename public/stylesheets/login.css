@@ -218,3 +218,9 @@ div .cuentaYContraseña {
 #noSeVe{
     display:none;
 }
+div.errores ul{
+    color: red;
+    list-style: none;
+    font-size: 1rem;
+    text-align: center;
+}
