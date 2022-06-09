@@ -20,7 +20,9 @@
    
     <%- include('partials/header') %>
 <div class="cuerpoLogin">
-          
+    <div class="errores">
+        <ul></ul>
+    </div>      
     <form action="/users/login" method="POST">
         <div class ="paginaLogin">
         <%- include('partials/cuerpoLogin') %>  
