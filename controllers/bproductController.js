@@ -362,9 +362,14 @@ const controller = {
       productColors,
       productYears,
       productTypes,
+
+
+
+
+      
       productColections,
     ]) {
-      return res.render("altaProductoDb", {
+      return res.render("altaProductDB", {
         colors: productColors,
         years: productYears,
         types: productTypes,
@@ -392,7 +397,7 @@ const controller = {
         productTypes,
         productColections,
       ]) {
-        return res.render("altaProductoDb", {
+        return res.render("altaProductoDB", {
           errorsProd: errors.mapped(),
           colors: productColors,
           years: productYears,
